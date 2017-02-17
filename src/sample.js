@@ -19,9 +19,6 @@ var shuffle = require('./shuffle');
  * @example
  * var values = [1, 2, 4, 5, 6, 7, 8, 9];
  * sample(values, 3); // returns 3 random values, like [2, 5, 8];
-
-
-
  */
 function sample/*:: <T> */(
     array /*: Array<T> */,
@@ -31,10 +28,11 @@ function sample/*:: <T> */(
 
     var sampledValues = [];
 
-    if(isWithReplacement){
-        for(var i=0; i < n; i++){//do for as many samples element you need (n)
+    if (isWithReplacement) {
+        randomSource = randomSource || Math.random; //should that be just part of this branch OR on top of the if structure?
+        for (var i = 0; i < n; i++) { //do for as many samples element you need (n)
             //generate random number that can be an index for array
-            var randomIndex = Math.floor(Math.random() * (array.length));
+            var randomIndex = Math.floor(randomSource() * (array.length));
             //add a random value (selected by randomIndex) to the sampledValues-Array
             sampledValues.push(array[randomIndex]);
         }
